@@ -10,5 +10,6 @@ paper = open(paper_fn)
 Lines = paper.readlines()
 for line in Lines:
     source = line.strip().split("\t")
+    print(source)
     subprocess.run(["scidownl", "download", "--"+source[2], source[0],
                     "--out", os.path.join(current_dir, "paper", source[1]+".pdf")])

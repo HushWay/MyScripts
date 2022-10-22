@@ -11,3 +11,6 @@ $ pip3 install -U scidownl
 34107009	452	pmid
 35071482	453	pmid
 ```
+
+## 使用方式
+点击`点我下载，一刀999.bat`自动下载文献，存储于paper文件夹
