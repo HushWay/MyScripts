@@ -1,8 +1,5 @@
 #! python3
 # DownloadPapers 批量下载文献
-# 参考：https://github.com/Tishacy/SciDownl/blob/v1.0/example/simple.py
-# https://stackoverflow.com/questions/4934806/how-can-i-find-scripts-directory
-
 import os
 import subprocess
 
