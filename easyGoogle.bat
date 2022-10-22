@@ -1,0 +1,1 @@
+python.exe D:\MyPythonScripts\easyGoogle.py %*
