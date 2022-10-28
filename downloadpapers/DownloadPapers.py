@@ -3,7 +3,6 @@
 import os
 import subprocess
 
-# 根据需要存储的位置更改
 current_dir = os.path.dirname(os.path.abspath(__file__))
 paper_fn = os.path.join(current_dir, "papers.txt")
 paper = open(paper_fn)
