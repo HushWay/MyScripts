@@ -36,8 +36,8 @@ def logQuanFang(username = "2628201733@qq.com", password = "liuwei78"):
 
 logQuanFang()
 # TODO: 手动输入验证码
-print("请在10秒内完成验证并点击确定...")
-sleep(10)
+print("请在1分钟内输入账号、密码、验证并点击确定...")
+sleep(60)
 
 #### 检索文献 ####
 def searchPMID(driver, pmid):
