@@ -1,8 +1,9 @@
 # 文献下载脚本使用说明
 ## 使用说明
 1. 在papers.txt 中添加需要下载的 PMID/文章名称
-2. 点击 `downloadPaperPDF.bat`，会弹出命令行与浏览器网页，在网页中输入泉方账号、密码、验证码，点击登陆
-3. 回到命令行，输入enter开始下载
+2. 点击 `downloadPaperPDF.bat`，会弹出命令行与浏览器网页
+3. 在网页中输入泉方账号、密码、验证码，点击登陆
+4. 回到命令行，输入enter开始下载
 
 ## 注意
 - 第一次使用请先修改 `downloadPaperPDF.bat` 中 py 文件路径
