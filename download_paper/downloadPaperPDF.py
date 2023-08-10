@@ -76,6 +76,7 @@ def downloadByPMID(driver, pmid, wait_sec = 5):
 def processLine(fn,f,*args, retry_count = 1):
     file = open(fn, "r")
     log_fn = fn + ".log"
+    if(os.path.exists(log_fn)): os.remove(log_fn)
     log_file = open(log_fn, "w")
     lines = file.readlines()
 
