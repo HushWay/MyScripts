@@ -18,8 +18,8 @@ def configChromeDriver(download_path):
     })
     driver = webdriver.Chrome(options=option)
     return driver
-# current_dir = os.path.dirname(os.path.abspath(__file__))
-current_dir = "D:\\OneDrive - hrbmu.edu.cn\\workspace\\MyScripts\\泉方下载文献"
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# current_dir = "D:\\OneDrive - hrbmu.edu.cn\\workspace\\MyScripts\\泉方下载文献"
 download_path = os.path.join(current_dir, "papers")
 driver = configChromeDriver(download_path=download_path)
 
@@ -36,6 +36,8 @@ def logQuanFang(username = "2628201733@qq.com", password = "liuwei78"):
 
 logQuanFang()
 # TODO: 手动输入验证码
+print("请在10秒内完成验证并点击确定...")
+sleep(10)
 
 #### 检索文献 ####
 def searchPMID(driver, pmid):
@@ -56,6 +58,7 @@ def downloadPDF(driver):
     switchWindow(driver, 1)
     try:
         driver.execute_script("downloadPdf()")
+        print("下载成功")
     except:
         print("下载失败")
     driver.close()
@@ -80,11 +83,10 @@ def processLine(fn,f,*args, retry_count = 1):
         while retry_indx <= retry_count:
             try:
                 f(*args, pmid)
-                print("成功")
                 break # 成功的话跳出
             except Exception as e:
                 print(f"Error processing {pmid}:{e}")
-                if retry_indx <= retry_indx:
+                if retry_indx <= retry_count:
                     print("重试中...")
                     retry_indx += 1
                 else:
