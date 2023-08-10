@@ -1,3 +1,6 @@
+# TODO: 使用说明
+# ...
+
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -36,6 +39,7 @@ logQuanFang()
 
 #### 检索文献 ####
 def searchPMID(driver, pmid):
+    switchWindow(driver, 0)
     driver.get("https://pm.yuntsg.com/searchList.html")
     sleep(5)
     inputByID(driver, "keyWord", pmid)
@@ -50,9 +54,11 @@ def applyFirstPDF(driver):
 
 def downloadPDF(driver):
     switchWindow(driver, 1)
-    driver.execute_script("downloadPdf()")
+    try:
+        driver.execute_script("downloadPdf()")
+    except:
+        print("下载失败")
     driver.close()
-    switchWindow(driver, 0)
 
 def downloadByPMID(driver, pmid, wait_sec = 5):
     sleep(wait_sec)
@@ -85,6 +91,5 @@ def processLine(fn,f,*args, retry_count = 1):
                     print("重试失败. 跳过。")
                     break
 
-            
 paper_fn = os.path.join(current_dir, "papers.txt")
 processLine(paper_fn, downloadByPMID, driver)
