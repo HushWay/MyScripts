@@ -1,0 +1,170 @@
+{
+  "name": "带伞提醒",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7,
+              "triggerAtMinute": 30
+            },
+            {
+              "triggerAtHour": 11,
+              "triggerAtMinute": 20
+            },
+            {
+              "triggerAtHour": 13,
+              "triggerAtMinute": 20
+            },
+            {
+              "triggerAtHour": 16,
+              "triggerAtMinute": 40
+            },
+            {
+              "triggerAtHour": 21,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "id": "9ea68662-d32f-4312-80ba-3f0aa5e72ca0",
+      "name": "到点了",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        380,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://t.weather.itboy.net/api/weather/city/101050101",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "3e32d0a2-53b3-4d1c-810f-3e124da5d2b8",
+      "name": "查天气",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        600,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://wxpusher.zjiecode.com/api/send/message",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "appToken",
+              "value": "AT_wCyHUpKnuc5iQtRLgEjLoTN3dkRqD4KA"
+            },
+            {
+              "name": "content",
+              "value": "今天有雨，记得带伞"
+            },
+            {
+              "name": "topicId",
+              "value": "11145"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": false,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "9063072b-0ff0-4cad-9508-54e2e73c8007",
+      "name": "发微信",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1020,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.data.forecast[0].type }}",
+              "operation": "contains",
+              "value2": "雨"
+            }
+          ]
+        }
+      },
+      "id": "e9872f04-8c04-4894-a3d6-01f0b34778cd",
+      "name": "下雨吗？",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        820,
+        320
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "到点了": {
+      "main": [
+        [
+          {
+            "node": "查天气",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查天气": {
+      "main": [
+        [
+          {
+            "node": "下雨吗？",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下雨吗？": {
+      "main": [
+        [
+          {
+            "node": "发微信",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Shanghai",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "017580cd-1aea-4768-bb62-9b6cac82d0f9",
+  "id": "XnczRuteWtPGcbQq",
+  "meta": {
+    "instanceId": "f3a79313b24153d6c9aff09a841e3ea5aabb74c6d0514acb79e1417a663b6181"
+  },
+  "tags": []
+}
