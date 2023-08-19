@@ -1,5 +1,5 @@
 {
-  "name": "带伞提醒",
+  "name": "UmbrellaReminder",
   "nodes": [
     {
       "parameters": {
@@ -56,7 +56,8 @@
       "position": [
         600,
         320
-      ]
+      ],
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -94,7 +95,8 @@
       "position": [
         1020,
         300
-      ]
+      ],
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -115,7 +117,8 @@
       "position": [
         820,
         320
-      ]
+      ],
+      "retryOnFail": true
     }
   ],
   "pinData": {},
@@ -161,7 +164,7 @@
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner"
   },
-  "versionId": "017580cd-1aea-4768-bb62-9b6cac82d0f9",
+  "versionId": "4d0e7dac-8c98-49ed-9138-ac0f5c8ffced",
   "id": "XnczRuteWtPGcbQq",
   "meta": {
     "instanceId": "f3a79313b24153d6c9aff09a841e3ea5aabb74c6d0514acb79e1417a663b6181"

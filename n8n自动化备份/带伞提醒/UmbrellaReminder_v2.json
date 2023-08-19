@@ -1,0 +1,173 @@
+{
+  "name": "UmbrellaReminder.v2",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7,
+              "triggerAtMinute": 30
+            },
+            {
+              "triggerAtHour": 11,
+              "triggerAtMinute": 20
+            },
+            {
+              "triggerAtHour": 13,
+              "triggerAtMinute": 20
+            },
+            {
+              "triggerAtHour": 16,
+              "triggerAtMinute": 40
+            },
+            {
+              "triggerAtHour": 21,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "id": "9713a530-dfc7-42a0-a78d-00afc84fed2b",
+      "name": "TimeUp",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        380,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://devapi.qweather.com/v7/minutely/5m?location=126.61,45.70&key=0e3c08103b314a9694616ee6e40276f8",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "5b9365fb-56a6-4f3e-83f4-09f80c4436ef",
+      "name": "RainInTwoHour",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        600,
+        320
+      ],
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json[\"summary\"] }}",
+              "operation": "notContains",
+              "value2": "未来两小时无降水"
+            }
+          ]
+        }
+      },
+      "id": "e343cb3a-6c45-4def-859c-75decb7327c2",
+      "name": "Rainy",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        820,
+        320
+      ],
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "url": "https://wxpusher.zjiecode.com/api/send/message",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "appToken",
+              "value": "AT_wCyHUpKnuc5iQtRLgEjLoTN3dkRqD4KA"
+            },
+            {
+              "name": "content",
+              "value": "={{ $('RainInTwoHour').item.json.summary }}"
+            },
+            {
+              "name": "topicId",
+              "value": "11145"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "e2d3008c-3351-421c-a87c-6883a2f4b399",
+      "name": "wxPush",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1020,
+        300
+      ],
+      "retryOnFail": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "TimeUp": {
+      "main": [
+        [
+          {
+            "node": "RainInTwoHour",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RainInTwoHour": {
+      "main": [
+        [
+          {
+            "node": "Rainy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rainy": {
+      "main": [
+        [
+          {
+            "node": "wxPush",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Shanghai",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "9436a0c8-0a8f-4e31-90e7-72291a90d216",
+  "id": "g5MxTbPJcgWxNHOP",
+  "meta": {
+    "instanceId": "f3a79313b24153d6c9aff09a841e3ea5aabb74c6d0514acb79e1417a663b6181"
+  },
+  "tags": []
+}

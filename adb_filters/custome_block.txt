@@ -1,0 +1,7 @@
+[Adblock Plus 3.1]
+! 百度热搜
+baidu.com##.s-hotsearch-title,.s-hotsearch-content,.cr-content
+! 百度广告
+baidu.com###con-ar,.hint_right_middle
+! 百度多余功能
+baidu.com###s-top-left,.s-top-right,#bottom_layer,#s_side_wrapper,#u
