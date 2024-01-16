@@ -1,9 +1,9 @@
 [Adblock Plus 3.1]
 ! Checksum: 
-! Version: 20230819
+! Version:
 ! Title: ABP filters
-! Last modified: 19 Aug 2023 07:10 UTC
-! Expires: 4 days (update frequency)
+! Last modified:
+! Expires: 7 days (update frequency)
 ! Homepage: https://github.com/HushWay/MyScripts/blob/main/adb_filters/
 !
 ! Filter list designed to fight circumvention ads (including, in some cases, their tracking) and fix critical issues for Adblock Plus users

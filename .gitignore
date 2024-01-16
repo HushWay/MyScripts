@@ -1,1 +1,6 @@
 download_paper/papers/*
+*docx
+*.html
+*.ttf
+*.pdf
+*.zip
