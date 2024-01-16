@@ -46,7 +46,7 @@ perm <- function(v) {
 ########
 #' -----------测试案例-----------
 # # 数据来源：http://www.cnblogs.com/grenet/archive/2013/02/28/2936965.html
-# source("D:/OneDrive - hrbmu.edu.cn/workspace/R/算24点/题库.R")
+# source("D:/OneDrive - hrbmu.edu.cn/workspace/MyScripts/算24点/题库.R")
 # for (card in cards) {
 #     cal24(card)
 # }
